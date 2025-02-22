@@ -1,0 +1,183 @@
+:root {
+    --primary-color: #3b82f6;
+    --secondary-color: #8b5cf6;
+    --bg-light: #f3f4f6;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: black; /* Dark text color for light mode */
+
+  }
+  
+  .nav-link:hover {
+    color: var(--primary-color);
+  }
+  
+  .section {
+    scroll-margin-top: 4rem;
+  }
+  
+  /* Custom keyframe animation for subtle pulsing */
+  @keyframes pulseScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Hamburger menu transition */
+  .mobile-menu {
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  
+  /* Back to top button styling */
+  #backToTop {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    display: none;
+    cursor: pointer;
+    z-index: 100;
+    transition: background 0.3s ease;
+  }
+  
+  #backToTop:hover {
+    background: var(--secondary-color);
+  }
+
+ /* Typing Animation */
+.typing-animation {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 0.15em solid white; /* Cursor effect */
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.0.1em; /* Increased space between characters */
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  /* Typing effect */
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  /* Cursor blinking effect */
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: white;
+    }
+  }
+
+  /* Dark Mode Styles */
+.dark {
+    background-color: #1a202c;
+    color: white;
+  }
+  
+  .dark .bg-white {
+    background-color: #2d3748;
+  }
+  
+  .dark .text-gray-700 {
+    color: #e2e8f0;
+  }
+  
+  .dark .text-gray-800 {
+    color: #e2e8f0;
+  }
+  
+  .dark .bg-gray-50 {
+    background-color: #4a5568;
+  }
+  
+  .dark .bg-gray-100 {
+    background-color: #2d3748;
+  }
+  .dark .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .dark .hover\:text-blue-600:hover {
+    color: #63b3ed;
+  }
+  
+  .dark .bg-blue-600 {
+    background-color: #2563eb;
+  }
+  .dark .hover\:bg-blue-700:hover {
+    background-color: #1d4ed8;
+  }
+
+  .dark footer p {
+    color: #e2e8f0;
+  }
+  
+  .dark .border-gray-300 {
+    border-color: #4a5568;
+  }
+  
+  .dark .focus\:border-blue-500:focus {
+    border-color: #63b3ed;
+  }
+
+  /* Add to styles.css */
+.dark #typing-text {
+  color: white;
+}
+
+/* Ensure light mode color */
+#typing-text {
+  color: black;
+}
+
+/* Light mode text color */
+.role-text {
+  color: black; /* Default text color in light mode */
+}
+
+/* Dark mode text color */
+.dark .role-text {
+  color: white; /* Text color in dark mode */
+}
+
+/* Dark mode styles for the form */
+/* Dark mode styles for the form */
+.dark form {
+  background-color: #2d3748; /* Dark background for the form */
+  color: white; /* White text color for the form */
+}
+
+.dark form label {
+  color: white; /* White text color for labels */
+}
+
+.dark form input,
+.dark form textarea {
+  background-color: #4a5568; /* Dark background for input fields */
+  color: white; /* White text color for input fields */
+  border-color: #4a5568; /* Dark border color for input fields */
+}
+
+.dark form input:focus,
+.dark form textarea:focus {
+  border-color: #63b3ed; /* Focus border color for input fields */
+  outline: none;
+}
