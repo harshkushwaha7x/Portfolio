@@ -1,98 +1,206 @@
-// Initialize AOS
-AOS.init({
-    duration: 1000,
-    once: true,
-  });
-  
-  // Mobile Menu Toggle
+// Initialize AOS with proper error handling
+const initAOS = () => {
+  try {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-out-quad',
+      mirror: false
+    });
+  } catch (error) {
+    console.error('AOS initialization failed:', error);
+  }
+};
+
+// Enhanced mobile menu with touch support
+const initMobileMenu = () => {
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
-  menuBtn.addEventListener('click', () => {
-    if(mobileMenu.style.maxHeight){
-      mobileMenu.style.maxHeight = null;
-    } else {
-      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-    }
-  });
-  
-  // Back to Top Button
-  const backToTop = document.getElementById('backToTop');
-  window.addEventListener('scroll', () => {
-    if(window.pageYOffset > 300){
-      backToTop.style.display = "block";
-    } else {
-      backToTop.style.display = "none";
-    }
-  });
-  
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }
 
+  const toggleMenu = () => {
+    mobileMenu.style.maxHeight = mobileMenu.style.maxHeight 
+      ? null 
+      : `${mobileMenu.scrollHeight}px`;
+  };
+
+  menuBtn.addEventListener('click', toggleMenu);
+  menuBtn.addEventListener('touchstart', toggleMenu);
+
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.style.maxHeight = null;
+    });
+  });
+};
+
+// Smooth scroll for all navigation links
+const initSmoothScroll = () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+};
+
+// Improved typing animation with persistent cursor blink
+const initTypingAnimation = () => {
   const text = "Hi, I'm Harsh Kushwaha";
   const typingText = document.getElementById("typing-text");
-  
   let index = 0;
   let isDeleting = false;
-  
-  function type() {
+  let typingSpeed = 100;
+  let deleteSpeed = 50;
+  let pauseDuration = 1500;
+
+  const animate = () => {
     const currentText = text.substring(0, index);
-  
-    // Update the text content
-    typingText.textContent = currentText;
-  
-    if (!isDeleting && index < text.length) {
-      // Typing phase: Add one character at a time
-      index++;
-      setTimeout(type, 100); // Typing speed (100ms per character)
-    } else if (isDeleting && index > 0) {
-      // Deleting phase: Remove one character at a time
-      index--;
-      setTimeout(type, 50); // Deleting speed (50ms per character)
+    
+    typingText.innerHTML = currentText + '<span class="typing-cursor"></span>';
+
+    if (!isDeleting) {
+      // Typing phase
+      if (index < text.length) {
+        index++;
+        setTimeout(animate, typingSpeed);
+      } else {
+        // Start deleting after pause
+        isDeleting = true;
+        setTimeout(animate, pauseDuration);
+      }
     } else {
-      // Switch between typing and deleting
-      isDeleting = !isDeleting;
-  
-      // Add a pause before starting the next phase
-      setTimeout(type, isDeleting ? 1000 : 100); // Pause before deleting or typing
+      // Deleting phase
+      if (index > 0) {
+        index--;
+        setTimeout(animate, deleteSpeed);
+      } else {
+        // Restart cycle after deletion
+        isDeleting = false;
+        setTimeout(animate, typingSpeed);
+      }
     }
-  }
+  };
+
+  // Start animation
+  animate();
+};
+
+// Enhanced dark mode with system preference detection
+const initDarkMode = () => {
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIconPath = document.getElementById('themeIconPath');
+  const body = document.body;
+
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  systemTheme.addEventListener('change', e => {
+    if(!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  const updateIcon = (theme) => {
+    const iconPaths = {
+      dark: 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z',
+      light: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z',
+    };
+    themeIconPath.setAttribute('d', iconPaths[theme]);
+  };
+
+  const setTheme = (theme) => {
+    body.classList.remove('dark', 'light');
+    body.classList.add(theme);
+    localStorage.setItem('theme', theme);
+    updateIcon(theme);
+  };
+
+  themeToggle.addEventListener('click', () => {
+    const newTheme = body.classList.contains('dark') ? 'light' : 'dark';
+    setTheme(newTheme);
+  });
+
+  // Initialize theme
+  const savedTheme = localStorage.getItem('theme') || getSystemTheme();
+  setTheme(savedTheme);
+};
+
+// Enhanced form submission with loading state
+const initForm = () => {
+  const form = document.querySelector('form');
+  const submitBtn = form.querySelector('button[type="submit"]');
   
-  // Start the typing animation
-  type();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
-  // Dark Mode Toggle
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
-const themeIconPath = document.getElementById('themeIconPath');
-const body = document.body;
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending...';
 
-// Check for saved theme in localStorage
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  body.classList.add(savedTheme);
-  updateIcon(savedTheme);
-}
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      
+      if (response.ok) {
+        alert('Message sent successfully!');
+        form.reset();
+      } else {
+        throw new Error('Server response was not OK');
+      }
+    } catch (error) {
+      alert('Error sending message. Please try again later.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
+  });
+};
 
-themeToggle.addEventListener('click', () => {
-  if (body.classList.contains('dark')) {
-    body.classList.remove('dark');
-    localStorage.setItem('theme', 'light');
-    updateIcon('light');
-  } else {
-    body.classList.add('dark');
-    localStorage.setItem('theme', 'dark');
-    updateIcon('dark');
+// Initialize all components with error handling
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    initAOS();
+    initMobileMenu();
+    initSmoothScroll();
+    initTypingAnimation();
+    initDarkMode();
+    initForm();
+    initBackToTop();
+  } catch (error) {
+    console.error('Initialization error:', error);
   }
 });
 
-function updateIcon(theme) {
-  if (theme === 'dark') {
-    themeIconPath.setAttribute('d', 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z');
-  } else {
-    themeIconPath.setAttribute('d', 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z');
-  }
-}
+const initBackToTop = () => {
+  const backToTop = document.getElementById('backToTop');
+
+  const checkScroll = () => {
+    // Show button when either:
+    // 1. Scrolled more than 300px from top
+    // 2. Near bottom of page (100px threshold)
+    const scrolledFromTop = window.pageYOffset > 300;
+    const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+    
+    backToTop.style.display = scrolledFromTop || nearBottom ? 'block' : 'none';
+  };
+
+  window.addEventListener('scroll', checkScroll);
+  window.addEventListener('resize', checkScroll); // Handle screen resize
+  checkScroll(); // Initial check
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+};
