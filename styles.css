@@ -272,31 +272,35 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
                 0 4px 6px -2px rgba(0, 0, 0, 0.25);
   }
-  
-  /* Borders */
-  .dark .border-gray-300,
-  .dark .border-gray-700 {
-    border-color: #373737 !important;
-  }
-  
-  .dark .focus\:border-blue-500:focus {
-    border-color: #3da5fe !important;
-  }
-  
-  /* Buttons */
-  .dark .bg-blue-600 {
-    background-color: #3da5fe;
-  }
-  
-  .dark .hover\:bg-blue-700:hover {
-    background-color: #2b94ec;
-  }
-  
-  /* Footer */
-  .dark footer p {
-    color: #e2e8f0;
-  }
-  
+/* Borders */
+.dark .border-gray-300,
+.dark .border-gray-700 {
+  border-color: #373737 !important;
+}
+
+.dark .focus\:border-blue-500:focus {
+  border-color: #3da5fe !important;
+}
+
+/* Buttons */
+.dark .bg-blue-600 {
+  background-color: #3da5fe;
+}
+
+.dark .hover\:bg-blue-700:hover {
+  background-color: #2b94ec;
+}
+
+/* Footer */
+.dark footer p {
+  color: #e2e8f0;
+}
+
+.dark a[href^="mailto:"]:hover,
+.dark a[href^="tel:"]:hover,
+.dark a[href^="https://"]:hover {
+  color: #60a5fa !important; /* blue-400 */
+}
   /* ==========================================================================
      FORM STYLES
      ========================================================================== */
