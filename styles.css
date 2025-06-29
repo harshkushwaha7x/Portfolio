@@ -1,0 +1,540 @@
+/* ==========================================================================
+   CSS VARIABLES & ROOT STYLES
+   ========================================================================== */
+
+   :root {
+    --primary-color: #3b82f6;
+    --secondary-color: #3da5fe;
+  }
+  
+  /* ==========================================================================
+     BASE STYLES
+     ========================================================================== */
+  
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+    scrollbar-gutter: stable;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  /* ==========================================================================
+     DARK MODE BASE
+     ========================================================================== */
+  
+  .dark {
+    background-color: #0f0f0f;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #ffffff;
+  }
+  
+  /* ==========================================================================
+     NAVIGATION STYLES
+     ========================================================================== */
+  
+  nav {
+    box-shadow: none;
+    transition: all 0.3s ease;
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dark nav {
+    background-color: #212121 !important;
+    border-color: #373737 !important;
+  }
+  
+  /* Logo Styling */
+  nav a[aria-label="Home"] {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  
+  /* Navigation Links */
+  .nav-link {
+    position: relative;
+    padding: 0.5rem 0;
+    color: #111827;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: var(--primary-color);
+  }
+  
+  .dark .nav-link {
+    color: #e2e8f0;
+  }
+  
+  .dark .nav-link:hover {
+    color: var(--primary-color);
+  }
+  
+  /* Mobile Menu */
+  .mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .dark .mobile-menu {
+    border-top: 1px solid #202020;
+  }
+  
+  /* Theme Toggle */
+  #themeIconPath {
+    transition: d 0.3s ease;
+  }
+  
+  /* ==========================================================================
+     HOME SECTION & VIDEO BACKGROUND
+     ========================================================================== */
+  
+  #home {
+    position: relative;
+    isolation: isolate;
+    background-color: #f8f9fa;
+    overflow: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+  
+  .dark #home {
+    background-color: #000000;
+  }
+  
+  /* Video Background */
+  #backgroundVideo {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+  
+  .dark #backgroundVideo {
+    opacity: 0.5;
+  }
+  
+  /* Typing Animation */
+  .typing-cursor {
+    display: inline-block;
+    width: 0.15em;
+    background: currentColor;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+  }
+  
+  @keyframes blink {
+    from, to { opacity: 1 }
+    50% { opacity: 0 }
+  }
+  
+  #typing-text {
+    color: #1a202c;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  }
+  
+  .dark #typing-text {
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  }
+  
+  .role-text {
+    color: black;
+  }
+  
+  .dark .role-text {
+    color: white;
+  }
+  
+  /* Scroll Down Button */
+  #home .animate-bounce {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  #home .animate-bounce:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .dark #home .animate-bounce {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  .dark #home .animate-bounce:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Arrow Styles */
+  .dark-mode-arrow {
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    background-color: #000 !important;
+  }
+  
+  .light-mode-arrow {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* ==========================================================================
+     SECTION STYLES
+     ========================================================================== */
+  
+  .section {
+    scroll-margin-top: 4rem;
+  }
+  
+  /* About Section */
+  #about {
+    padding: 70px 0;
+  }
+  
+  #about h2 {
+    font-size: 1.875rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+    color: #111827;
+  }
+  
+  .dark #about h2 {
+    color: #fff;
+  }
+  
+  #about img {
+    max-width: 90%;
+    transition: transform 0.3s ease;
+  }
+  
+  #about img:hover {
+    transform: translateY(-5px);
+  }
+  
+  #about p {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #4b5563;
+    margin-bottom: 1rem;
+  }
+  
+  .dark #about p {
+    color: #e2e8f0 !important;
+  }
+  
+  /* ==========================================================================
+     DARK MODE OVERRIDES
+     ========================================================================== */
+  
+  /* Background Colors */
+  .dark .bg-white {
+    background-color: #212121 !important;
+  }
+  
+  .dark .bg-gray {
+    background-color: #0f0f0f !important;
+  }
+  
+  /* Text Colors */
+  .dark .text-gray-600 {
+    color: #d1d5db !important;
+  }
+  
+  .dark .text-gray-700,
+  .dark .text-gray-800 {
+    color: #e5e7eb !important;
+  }
+  
+  .dark .text-xl.font-bold {
+    color: #fff !important;
+  }
+  
+  /* Shadows */
+  .dark .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+                0 4px 6px -2px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Borders */
+  .dark .border-gray-300,
+  .dark .border-gray-700 {
+    border-color: #373737 !important;
+  }
+  
+  .dark .focus\:border-blue-500:focus {
+    border-color: #3da5fe !important;
+  }
+  
+  /* Buttons */
+  .dark .bg-blue-600 {
+    background-color: #3da5fe;
+  }
+  
+  .dark .hover\:bg-blue-700:hover {
+    background-color: #2b94ec;
+  }
+  
+  /* Footer */
+  .dark footer p {
+    color: #e2e8f0;
+  }
+  
+  /* ==========================================================================
+     FORM STYLES
+     ========================================================================== */
+  
+  .dark form {
+    background-color: #212121 !important;
+    color: white;
+  }
+  
+  .dark form label {
+    color: white;
+  }
+  
+  .dark form input,
+  .dark form textarea {
+    background-color: #373737 !important;
+    color: white;
+    border-color: #373737 !important;
+  }
+  
+  .dark form input:focus,
+  .dark form textarea:focus {
+    border-color: #3da5fe !important;
+  }
+  
+  /* ==========================================================================
+     PROJECT CARDS & MODALS
+     ========================================================================== */
+  
+  /* Project Card Base Styles */
+  .project-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 100%;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Project Section Backgrounds */
+  #projects .bg-white,
+  #skills .bg-white,
+  #certifications .bg-white {
+    background-color: #f0f4f8 !important;
+    border: 1px solid #e4e7eb;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .dark #projects .bg-white,
+  .dark #skills .bg-white,
+  .dark #certifications .bg-white {
+    background-color: #1e1e1e !important;
+    border: 1px solid #2a2a2a;
+  }
+  
+  #skills .bg-white:hover,
+  #certifications .bg-white:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Project Image Placeholders */
+  #projects .h-48 {
+    height: 180px;
+    background-color: #e2e8f0 !important;
+  }
+  
+  .dark #projects .h-48 {
+    background-color: #2a2a2a !important;
+  }
+  
+  /* Gray Backgrounds */
+  #projects .bg-gray-100,
+  #skills .bg-gray-100,
+  #certifications .bg-gray-100 {
+    background-color: #e2e8f0 !important;
+  }
+  
+  .dark #projects .bg-gray-100,
+  .dark #skills .bg-gray-100,
+  .dark #certifications .bg-gray-100 {
+    background-color: #2d3748 !important;
+  }
+  
+  /* Project Modal */
+  #projectModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(0);
+    backdrop-filter: blur(2px);
+  }
+  
+  #projectModal.hidden {
+    display: none;
+  }
+  
+  #projectModal > div {
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalFadeIn 0.3s ease;
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Project Tags */
+  .project-modal-tag {
+    background-color: #e0e7ff;
+    color: #1e40af;
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+  
+  .dark .project-modal-tag {
+    background-color: #1e40af;
+    color: #e0e7ff;
+  }
+  
+  .px-3.py-1 {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .px-3.py-1:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* View Details Button Animation */
+  .text-blue-500.flex.items-center:hover svg {
+    transform: translateX(4px);
+    transition: transform 0.2s ease;
+  }
+  
+  .text-blue-500 svg {
+    transition: transform 0.2s ease;
+  }
+  
+  /* ==========================================================================
+     UTILITY STYLES
+     ========================================================================== */
+  
+  /* General Hover Effects */
+  .hover\:shadow-xl:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Underline on Hover */
+  .group .underline-on-hover {
+    text-decoration: none;
+  }
+  
+  .group:hover .underline-on-hover {
+    text-decoration: underline;
+  }
+  
+  .no-underline {
+    text-decoration: none;
+  }
+  
+  /* Get In Touch Button Override */
+  a[href="#contact"].inline-block {
+    background-color: white !important;
+    color: #1f2937 !important;
+    border-color: #1f2937 !important;
+  }
+  
+  a[href="#contact"].inline-block:hover {
+    background-color: #f9fafb !important;
+  }
+  
+  /* Back to Top Button */
+  #backToTop {
+    position: fixed !important;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    display: none;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background 0.3s ease;
+  }
+  
+  #backToTop:hover {
+    background: var(--secondary-color);
+  }
+  
+  /* GitHub Stats Container */
+  #github-stats-container {
+    background: transparent !important;
+  }
+  
+  /* ==========================================================================
+     ANIMATIONS & KEYFRAMES
+     ========================================================================== */
+  
+  @keyframes pulseScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: white; }
+  }
+  
+  /* ==========================================================================
+     RESPONSIVE STYLES
+     ========================================================================== */
+  
+  @media (max-width: 640px) {
+    #projectModal > div {
+      width: 90%;
+      margin: 0 auto;
+    }
+    
+    .h-64.object-cover {
+      height: 200px;
+    }
+  }
